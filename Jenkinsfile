@@ -12,13 +12,43 @@
 
 pipeline {
     agent any
+    tools { maven 'Maven 3.9.1' }
 
     stages {
         stage('Calculate & Set Version') {
+            when { branch "release/*" }
             steps {
-
+                // Calculate next version number
+                script {
+                }   
             }
+        }
 
+        stage('Build  Test') {
+
+        }
+
+        stage('Code analysis') {
+
+        }
+    }
+
+    post {
+        success {
+            slackSend(
+                channel: '#ex-suggested-library',
+                color: 'good',
+                message: "The ${currentBuild.fullDisplayName} succeeded!",
+                token: 'slack-token'
+            )
+        }
+        failure {
+            slackSend(
+                channel: '#ex-suggested-library',
+                color: 'danger',
+                message: "The ${currentBuild.fullDisplayName} failed!",
+                token: 'slack-token'
+            )
         }
     }
 }
