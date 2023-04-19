@@ -25,6 +25,9 @@ pipeline {
         }
 
         stage('Build  Test') {
+            steps {
+                
+            }
 
         }
 
