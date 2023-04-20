@@ -36,6 +36,9 @@ pipeline {
         }
 
         stage('Build  Test') {
+            when {
+                branch "master"
+            }
             steps {
                 script{
                     echo 'step 2'
