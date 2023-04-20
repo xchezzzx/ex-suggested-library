@@ -16,7 +16,9 @@ pipeline {
 
     stages {
         stage('Calculate & Set Version') {
-            when { branch "release/*" }
+            when {
+                branch "release/*"
+            }
             steps {
                 // Calculate next version number
                 script {
