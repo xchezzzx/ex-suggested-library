@@ -32,7 +32,6 @@ pipeline {
             steps {
                 // Calculate next version number
                 script {
-                    echo env.BRANCH_NAME
                     sh "echo env.BRANCH_NAME"
                 }   
             }
