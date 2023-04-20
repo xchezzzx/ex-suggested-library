@@ -19,10 +19,11 @@ pipeline {
             steps {
                 script {
                     echo env.BRANCH_NAME
+                    sh "echo env.BRANCH_NAME"
                 }
             }
         }
-        
+
         stage('Calculate & Set Version') {
             when {
                 branch "release/*"
@@ -31,6 +32,7 @@ pipeline {
                 // Calculate next version number
                 script {
                     echo env.BRANCH_NAME
+                    sh "echo env.BRANCH_NAME"
                 }   
             }
         }
