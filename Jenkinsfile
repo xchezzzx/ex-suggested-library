@@ -18,7 +18,7 @@ pipeline {
         stage('wtf') {
             steps {
                 script {
-                    //echo env.GIT_BRANCH
+                    echo env.GIT_BRANCH
                     sh "echo $env.GIT_BRANCH"
                     sh "printenv"
                 }
