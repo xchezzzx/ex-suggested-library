@@ -27,13 +27,19 @@ pipeline {
 
         stage('Build  Test') {
             steps {
-                echo 'step 2'
+                script{
+                    echo 'step 2'
+                }
             }
 
         }
 
         stage('Code analysis') {
-            echo 'step 3'
+            steps {
+                script {
+                echo 'step 3'
+                }
+            }
         }
     }
 
