@@ -25,12 +25,12 @@ pipeline {
 
         stage('Calculate & Set Version') {
             when {
-                branch "*release*"
+                branch '*release*'
             }
             steps {
                 // Calculate next version number
                 script {
-                    echo env.GIT_BRANCH
+                    echo 'step 2'
                 }   
             }
         }
