@@ -17,7 +17,7 @@ pipeline {
     stages {
         stage('Calculate & Set Version') {
             when {
-                branch "origin/release/*"
+                branch "release/*"
             }
             steps {
                 // Calculate next version number
