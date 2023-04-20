@@ -15,9 +15,17 @@ pipeline {
     tools { maven 'Maven 3.9.1' }
 
     stages {
+        stage('wtf') {
+            steps {
+                script {
+                    echo env.BRANCH_NAME
+                }
+            }
+        }
+        
         stage('Calculate & Set Version') {
             when {
-                branch "origin/release/*"
+                branch "release/*"
             }
             steps {
                 // Calculate next version number
