@@ -20,15 +20,14 @@ pipeline {
             steps {
                 // Calculate next version number
                 script {
+                    echo env.BRANCH_NAME
                 }   
             }
         }
 
         stage('Build  Test') {
             steps {
-                //testing 42 times
-                //43
-                //44
+                
             }
 
         }
