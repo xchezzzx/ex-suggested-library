@@ -19,7 +19,6 @@ pipeline {
             steps {
                 script {
                     echo env.BRANCH_NAME
-                    printenv
                     sh "echo env.BRANCH_NAME"
                     sh "printenv"
                 }
