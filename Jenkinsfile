@@ -19,8 +19,6 @@ pipeline {
             steps {
                 script {
                     echo env.GIT_BRANCH
-                    sh "echo $env.GIT_BRANCH"
-                    sh "printenv"
                 }
             }
         }
@@ -32,7 +30,7 @@ pipeline {
             steps {
                 // Calculate next version number
                 script {
-                    sh "echo env.BRANCH_NAME"
+                    echo env.GIT_BRANCH
                 }   
             }
         }
