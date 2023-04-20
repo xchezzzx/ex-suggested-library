@@ -30,7 +30,7 @@ pipeline {
             steps {
                 // Calculate next version number
                 script {
-                    echo 'step 2'
+                    echo 'step 1'
                 }   
             }
         }
