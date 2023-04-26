@@ -50,16 +50,19 @@ pipeline {
 
                     versionNumber = env.GIT_BRANCH.replaceAll('release/', '')
                     echo "Version number: ${versionNumber}"
+                    echo "You are here 1"
 
                     sh "mvn help:evaluate -Dexpression=project.version -q -DforceStdout"
-                    //sh "mvn versions:set -DnewVersion=${newVersionNumber}"
                     echo "You are here 2"
 
-                    //def previousVersionNumber = sh(script: "mvn help:evaluate -Dexpression=project.version -q -DforceStdout", returnStdout: true).trim()
+                    def previousVersionNumber = sh(script: "mvn help:evaluate -Dexpression=project.version -q -DforceStdout", returnStdout: true).trim()
                     echo "You are here 3"
 
-                    //echo "Existing version number: ${previousVersionNumber}"
+                    echo "Existing version number: ${previousVersionNumber}"
                     echo "You are here 4"
+
+                    sh "mvn versions:set -DnewVersion=${newVersionNumber}"
+                    echo "You are here 5"
                 }   
             }
         }
