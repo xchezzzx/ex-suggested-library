@@ -12,7 +12,7 @@
 
 pipeline {
     agent any
-    tools { maven 'Maven 3.9.1' }
+    tools { maven 'Maven-3.9.1' }
 
     stages {
         // stage('wtf') {
@@ -40,7 +40,7 @@ pipeline {
 
                         def pomFile = 'pom.xml' // Replace with your POM file name
                         echo "You are here 2"
-                        previousVersionNumber = sh(script: "mvn help:evaluate -Dexpression=project.version -q -DforceStdout", returnStdout: true).trim()
+                        def previousVersionNumber = sh(script: "mvn help:evaluate -Dexpression=project.version -q -DforceStdout", returnStdout: true).trim()
                         echo "You are here 3"
                         echo "Existing version number: ${previousVersionNumber}"
                         echo "You are here 4"
