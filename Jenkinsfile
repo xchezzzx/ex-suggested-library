@@ -36,16 +36,16 @@ pipeline {
                     if (matcher.matches()) {
                         def newVersionNumber = matcher.group(1)
                         echo "New version number: ${newVersionNumber}"
-                        echo "You are here"
+                        echo "You are here 1"
 
                         def pomFile = 'pom.xml' // Replace with your POM file name
-                        echo "You are here"
+                        echo "You are here 2"
                         def mvnCmd = "xmlstarlet sel -N x=http://maven.apache.org/POM/4.0.0 -t -v //x:project/x:version -n ${pomFile}"
-                        echo "You are here"
+                        echo "You are here 3"
                         def oldVersionNumber = sh(returnStdout: true, script: mvnCmd).trim()
-                        echo "You are here"
+                        echo "You are here 4"
                         echo "Existing version number: ${oldVersionNumber}"
-                        echo "You are here"
+                        echo "You are here 5"
 
                         
                         // def pomFile = 'pom.xml' // Replace with your POM file name
