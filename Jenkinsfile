@@ -30,6 +30,7 @@ pipeline {
             steps {
                 // Calculate next version number
                 script {
+                    sh "apt-get install xmlstarlet"
                     // def releaseBranch = 'release/1.2.3' // Replace with your Git branch name
                     def pattern = /release\/(\d+\.\d+\.\d+)/
                     def matcher = (env.GIT_BRANCH =~ pattern)
