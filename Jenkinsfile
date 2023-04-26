@@ -58,6 +58,7 @@ pipeline {
 
                     sh "mvn versions:set -DnewVersion=${newVersionNumber}"
                     echo "You are here 3"
+                    sh "mvn help:evaluate -Dexpression=project.version -q -DforceStdout"
                 }   
             }
         }
