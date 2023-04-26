@@ -35,12 +35,12 @@ pipeline {
                     def matcher = (releaseBranch =~ pattern)
                     if (matcher.matches()) {
                         def newVersionNumber = matcher.group(1)
-                        echo "Found version number: ${newVersionNumber}"
+                        echo "New version number: ${newVersionNumber}"
 
                         def pomFile = 'pom.xml' // Replace with your POM file name
                         def mvnCmd = "xmlstarlet sel -N x=http://maven.apache.org/POM/4.0.0 -t -v //x:project/x:version -n ${pomFile}"
                         def oldVersionNumber = sh(returnStdout: true, script: mvnCmd).trim()
-                        echo "Found version number: ${oldVersionNumber}"
+                        echo "Existing version number: ${oldVersionNumber}"
                         
                         // def pomFile = 'pom.xml' // Replace with your POM file name
                         // def groupId = 'com.example'
