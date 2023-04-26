@@ -12,16 +12,9 @@
 
 pipeline {
     agent any
-    tools { maven 'Maven-3.6.3' }
+    tools { maven "Maven-3.6.3" }
 
     stages {
-        // stage('wtf') {
-        //     steps {
-        //         script {
-        //             echo env.GIT_BRANCH
-        //         }
-        //     }
-        // }
 
         stage('Calculate & Set Version') {
             when {
@@ -39,6 +32,7 @@ pipeline {
                         echo "You are here 1"
 
                         def pomFile = 'pom.xml' // Replace with your POM file name
+                        sh "mvn help:evaluate -Dexpression=project.version -q -DforceStdout"
                         sh "mvn help:evaluate -Dexpression=project.version -q -DforceStdout"
                         echo "You are here 2"
                         def previousVersionNumber = sh(script: "mvn help:evaluate -Dexpression=project.version -q -DforceStdout", returnStdout: true).trim()
