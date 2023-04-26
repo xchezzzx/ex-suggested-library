@@ -42,9 +42,9 @@ pipeline {
                         echo "You are here 2"
                         def mvnCmd = "xmlstarlet sel -N x=http://maven.apache.org/POM/4.0.0 -t -v //x:project/x:version -n ${pomFile}"
                         echo "You are here 3"
-                        def oldVersionNumber = sh(script: "xmlstarlet sel -N x=http://maven.apache.org/POM/4.0.0 -t -v //x:project/x:version -n ${pomFile} || true", returnStdout: true).trim()
+                        previousVersionNumber = sh(script: "xmlstarlet sel -N x=http://maven.apache.org/POM/4.0.0 -t -v //x:project/x:version -n pom.xml || true", returnStdout: true).trim()
                         echo "You are here 4"
-                        echo "Existing version number: ${oldVersionNumber}"
+                        echo "Existing version number: ${previousVersionNumber}"
                         echo "You are here 5"
 
                         
