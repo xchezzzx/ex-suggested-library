@@ -42,6 +42,7 @@ pipeline {
                         def oldVersionNumber = sh(returnStdout: true, script: mvnCmd).trim()
                         echo "Existing version number: ${oldVersionNumber}"
                         
+                        
                         // def pomFile = 'pom.xml' // Replace with your POM file name
                         // def groupId = 'com.example'
                         // def artifactId = 'my-project'
