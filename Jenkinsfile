@@ -15,13 +15,13 @@ pipeline {
     tools { maven 'Maven 3.9.1' }
 
     stages {
-        stage('wtf') {
-            steps {
-                script {
-                    echo env.GIT_BRANCH
-                }
-            }
-        }
+        // stage('wtf') {
+        //     steps {
+        //         script {
+        //             echo env.GIT_BRANCH
+        //         }
+        //     }
+        // }
 
         stage('Calculate & Set Version') {
             when {
@@ -30,9 +30,9 @@ pipeline {
             steps {
                 // Calculate next version number
                 script {
-                    def releaseBranch = 'release/1.2.3' // Replace with your Git branch name
+                    // def releaseBranch = 'release/1.2.3' // Replace with your Git branch name
                     def pattern = /release\/(\d+\.\d+\.\d+)/
-                    def matcher = (releaseBranch =~ pattern)
+                    def matcher = (env.GIT_BRANCH =~ pattern)
                     if (matcher.matches()) {
                         def newVersionNumber = matcher.group(1)
                         echo "New version number: ${newVersionNumber}"
@@ -41,7 +41,7 @@ pipeline {
                         def mvnCmd = "xmlstarlet sel -N x=http://maven.apache.org/POM/4.0.0 -t -v //x:project/x:version -n ${pomFile}"
                         def oldVersionNumber = sh(returnStdout: true, script: mvnCmd).trim()
                         echo "Existing version number: ${oldVersionNumber}"
-                        
+
                         
                         // def pomFile = 'pom.xml' // Replace with your POM file name
                         // def groupId = 'com.example'
