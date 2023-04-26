@@ -39,6 +39,11 @@ pipeline {
                     } else {
                         error "Failed to extract version number from ${releaseBranch}"
                     }
+
+                    def pomFile = 'pom.xml' // Replace with your POM file name
+                    def mvnCmd = "xmlstarlet sel -N x=http://maven.apache.org/POM/4.0.0 -t -v //x:project/x:version -n ${pomFile}"
+                    def versionNumber = sh(returnStdout: true, script: mvnCmd).trim()
+                    echo "Found version number: ${versionNumber}"
                 }   
             }
         }
