@@ -21,7 +21,6 @@ pipeline {
                 branch "release/*"
             }
             steps {
-                // Calculate next version number
                 script {
                     // def releaseBranch = 'release/1.2.3' // Replace with your Git branch name
                     def pattern = /release\/(\d+\.\d+\.\d+)/
@@ -31,13 +30,14 @@ pipeline {
                         echo "New version number: ${newVersionNumber}"
                         echo "You are here 1"
 
-                        def pomFile = 'pom.xml' // Replace with your POM file name
-                        sh "mvn help:evaluate -Dexpression=project.version -q -DforceStdout"
-                        sh "mvn help:evaluate -Dexpression=project.version -q -DforceStdout"
+                        //sh "mvn help:evaluate -Dexpression=project.version -q -DforceStdout"
+                        sh "mvn versions:set -DnewVersion=${newVersionNumber}"
                         echo "You are here 2"
-                        def previousVersionNumber = sh(script: "mvn help:evaluate -Dexpression=project.version -q -DforceStdout", returnStdout: true).trim()
+
+                        //def previousVersionNumber = sh(script: "mvn help:evaluate -Dexpression=project.version -q -DforceStdout", returnStdout: true).trim()
                         echo "You are here 3"
-                        echo "Existing version number: ${previousVersionNumber}"
+
+                        //echo "Existing version number: ${previousVersionNumber}"
                         echo "You are here 4"
 
                         
