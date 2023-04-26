@@ -29,18 +29,7 @@ pipeline {
                         def newVersionNumber = matcher.group(1)
                         echo "New version number: ${newVersionNumber}"
                         echo "You are here 1"
-
-                        //sh "mvn help:evaluate -Dexpression=project.version -q -DforceStdout"
-                        sh "mvn versions:set -DnewVersion=${newVersionNumber}"
-                        echo "You are here 2"
-
-                        //def previousVersionNumber = sh(script: "mvn help:evaluate -Dexpression=project.version -q -DforceStdout", returnStdout: true).trim()
-                        echo "You are here 3"
-
-                        //echo "Existing version number: ${previousVersionNumber}"
-                        echo "You are here 4"
-
-                        
+                       
                         // def pomFile = 'pom.xml' // Replace with your POM file name
                         // def groupId = 'com.example'
                         // def artifactId = 'my-project'
@@ -59,7 +48,15 @@ pipeline {
                         error "Failed to extract version number from ${releaseBranch}"
                     }
 
-                    
+                    sh "mvn help:evaluate -Dexpression=project.version -q -DforceStdout"
+                    //sh "mvn versions:set -DnewVersion=${newVersionNumber}"
+                    echo "You are here 2"
+
+                    //def previousVersionNumber = sh(script: "mvn help:evaluate -Dexpression=project.version -q -DforceStdout", returnStdout: true).trim()
+                    echo "You are here 3"
+
+                    //echo "Existing version number: ${previousVersionNumber}"
+                    echo "You are here 4"
                 }   
             }
         }
