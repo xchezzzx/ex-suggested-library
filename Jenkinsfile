@@ -57,7 +57,7 @@ pipeline {
                     echo "Existing version number: ${previousVersionNumber}"
                     echo "You are here 2"
 
-                    sh "mvn versions:compare -DcompareTo=${newVersionNumber}"
+                    //sh "mvn versions:compare -DcompareTo=${newVersionNumber}"
 
                     //setting new version to the pom file
                     sh "mvn versions:set -DnewVersion=${newVersionNumber}"
