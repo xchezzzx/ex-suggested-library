@@ -30,7 +30,15 @@ pipeline {
             steps {
                 // Calculate next version number
                 script {
-                    echo 'step 1'
+                    def releaseBranch = 'release/1.2.3' // Replace with your Git branch name
+                    def pattern = /release\/(\d+\.\d+\.\d+)/
+                    def matcher = (env.GIT_BRANCH =~ pattern)
+                    if (matcher.matches()) {
+                        def versionNumber = matcher.group(1)
+                        echo "Found version number: ${versionNumber}"
+                    } else {
+                        error "Failed to extract version number from ${releaseBranch}"
+                    }
                 }   
             }
         }
