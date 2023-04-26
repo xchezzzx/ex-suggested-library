@@ -30,7 +30,6 @@ pipeline {
             steps {
                 // Calculate next version number
                 script {
-                    sh "sudo apt-get install xmlstarlet"
                     // def releaseBranch = 'release/1.2.3' // Replace with your Git branch name
                     def pattern = /release\/(\d+\.\d+\.\d+)/
                     def matcher = (env.GIT_BRANCH =~ pattern)
@@ -41,7 +40,7 @@ pipeline {
 
                         def pomFile = 'pom.xml' // Replace with your POM file name
                         echo "You are here 2"
-                        previousVersionNumber = sh(script: "xmlstarlet sel -N x=http://maven.apache.org/POM/4.0.0 -t -v //x:project/x:version -n pom.xml || true", returnStdout: true).trim()
+                        previousVersionNumber = sh(script: "mvn help:evaluate -Dexpression=project.version -q -DforceStdout", returnStdout: true).trim()
                         echo "You are here 3"
                         echo "Existing version number: ${previousVersionNumber}"
                         echo "You are here 4"
