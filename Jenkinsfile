@@ -32,18 +32,35 @@ pipeline {
                 script {
                     def releaseBranch = 'release/1.2.3' // Replace with your Git branch name
                     def pattern = /release\/(\d+\.\d+\.\d+)/
-                    def matcher = (env.GIT_BRANCH =~ pattern)
+                    def matcher = (releaseBranch =~ pattern)
                     if (matcher.matches()) {
-                        def versionNumber = matcher.group(1)
-                        echo "Found version number: ${versionNumber}"
+                        def newVersionNumber = matcher.group(1)
+                        echo "Found version number: ${newVersionNumber}"
+
+                        def pomFile = 'pom.xml' // Replace with your POM file name
+                        def mvnCmd = "xmlstarlet sel -N x=http://maven.apache.org/POM/4.0.0 -t -v //x:project/x:version -n ${pomFile}"
+                        def oldVersionNumber = sh(returnStdout: true, script: mvnCmd).trim()
+                        echo "Found version number: ${oldVersionNumber}"
+                        
+                        // def pomFile = 'pom.xml' // Replace with your POM file name
+                        // def groupId = 'com.example'
+                        // def artifactId = 'my-project'
+                        
+                        // def mvnCmd = "mvn versions:compare -DgroupId=${groupId} -DartifactId=${artifactId} -DoldVersion=1.2.2 -DnewVersion=${newVersionNumber} -f ${pomFile}"
+                        // def mvnResult = sh(returnStdout: true, script: mvnCmd).trim()
+                        
+                        // if (mvnResult.contains("[WARNING] Versions are the same")) {
+                        //     echo "The version numbers are the same"
+                        // } else if (mvnResult.contains("[ERROR]")) {
+                        //     error "Failed to compare version numbers: ${mvnResult}"
+                        // } else {
+                        //     echo "The new version number is greater than the old version number"
+                        // }
                     } else {
                         error "Failed to extract version number from ${releaseBranch}"
                     }
 
-                    def pomFile = 'pom.xml' // Replace with your POM file name
-                    def mvnCmd = "xmlstarlet sel -N x=http://maven.apache.org/POM/4.0.0 -t -v //x:project/x:version -n ${pomFile}"
-                    def versionNumber = sh(returnStdout: true, script: mvnCmd).trim()
-                    echo "Found version number: ${versionNumber}"
+                    
                 }   
             }
         }
