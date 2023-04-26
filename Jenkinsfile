@@ -47,15 +47,19 @@ pipeline {
                     // } else {
                     //     error "Failed to extract version number from ${releaseBranch}"
                     // }
-
+                    //checking the branch version
                     newVersionNumber = env.GIT_BRANCH.replaceAll('release/', '')
                     echo "Current version number: ${newVersionNumber}"
                     echo "You are here 1"
 
+                    //checking the version in the pom file
                     def previousVersionNumber = sh(script: "mvn help:evaluate -Dexpression=project.version -q -DforceStdout", returnStdout: true).trim()
                     echo "Existing version number: ${previousVersionNumber}"
                     echo "You are here 2"
 
+                    sh "mvn versions:compare -DcompareTo=${newVersionNumber}"
+
+                    //setting new version to the pom file
                     sh "mvn versions:set -DnewVersion=${newVersionNumber}"
                     echo "You are here 3"
                     sh "mvn help:evaluate -Dexpression=project.version -q -DforceStdout"
@@ -63,16 +67,12 @@ pipeline {
             }
         }
 
-        stage('Build  Test') {
-            when {
-                branch "master"
-            }
+        stage('Build & Test') {
             steps {
                 script{
-                    echo 'step 2'
+                    sh "mvn verify"
                 }
             }
-
         }
 
         stage('Code analysis') {
