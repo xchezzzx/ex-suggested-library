@@ -39,6 +39,7 @@ pipeline {
                         echo "You are here 1"
 
                         def pomFile = 'pom.xml' // Replace with your POM file name
+                        sh "mvn help:evaluate -Dexpression=project.version -q -DforceStdout"
                         echo "You are here 2"
                         def previousVersionNumber = sh(script: "mvn help:evaluate -Dexpression=project.version -q -DforceStdout", returnStdout: true).trim()
                         echo "You are here 3"
