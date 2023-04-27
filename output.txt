@@ -1,0 +1,249 @@
+Started by user Oleg Milyukov
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/caches/git-6c0c070daf402d91323e7f6e582145a7/.git # timeout=10
+Setting origin to https://github.com/xchezzzx/ex-suggested-library
+ > git config remote.origin.url https://github.com/xchezzzx/ex-suggested-library # timeout=10
+Fetching origin...
+Fetching upstream changes from origin
+ > git --version # timeout=10
+ > git --version # 'git version 2.34.1'
+ > git config --get remote.origin.url # timeout=10
+using GIT_ASKPASS to set credentials jenkins-devops-course
+ > git fetch --tags --force --progress -- origin +refs/heads/*:refs/remotes/origin/* # timeout=10
+Seen branch in repository origin/master
+Seen branch in repository origin/release/0.0.2
+Seen 2 remote branches
+Obtained Jenkinsfile from 66715f40368163ddaff4b39547db00b36332c865
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/lib/jenkins/workspace/ibrary-multibranch_release_0.0.2
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+The recommended git tool is: git
+using credential jenkins-devops-course
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/ibrary-multibranch_release_0.0.2/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/xchezzzx/ex-suggested-library # timeout=10
+Cleaning workspace
+ > git rev-parse --verify HEAD # timeout=10
+Resetting working tree
+ > git reset --hard # timeout=10
+ > git clean -ffdx # timeout=10
+Fetching without tags
+Fetching upstream changes from https://github.com/xchezzzx/ex-suggested-library
+ > git --version # timeout=10
+ > git --version # 'git version 2.34.1'
+using GIT_ASKPASS to set credentials jenkins-devops-course
+ > git fetch --no-tags --force --progress -- https://github.com/xchezzzx/ex-suggested-library +refs/heads/*:refs/remotes/origin/* # timeout=10
+Checking out Revision 66715f40368163ddaff4b39547db00b36332c865 (release/0.0.2)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 66715f40368163ddaff4b39547db00b36332c865 # timeout=10
+ > git branch -a -v --no-abbrev # timeout=10
+ > git branch -D release/0.0.2 # timeout=10
+ > git checkout -b release/0.0.2 66715f40368163ddaff4b39547db00b36332c865 # timeout=10
+Commit message: "Jenkins triggered build: 58, set version 0.0.2"
+ > git rev-list --no-walk 3a2a04452967e351b1a0f6435dfae95af716ca48 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Tool Install)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Calculate & Set Version)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] script
+[Pipeline] {
+[Pipeline] echo
+Current version number: 0.0.2
+[Pipeline] sh
++ mvn help:evaluate -Dexpression=project.version -q -DforceStdout
+[Pipeline] echo
+Existing version number: 0.0.2
+[Pipeline] sh
++ mvn versions:set -DnewVersion=0.0.2
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for spelling:spelling:jar:0.0.2
+[WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-jar-plugin is missing. @ line 29, column 15
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] -------------------------< spelling:spelling >--------------------------
+[INFO] Building spelling 0.0.2
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- versions-maven-plugin:2.15.0:set (default-cli) @ spelling ---
+[INFO] Searching for local aggregator root...
+[INFO] Local aggregation root: /var/lib/jenkins/workspace/ibrary-multibranch_release_0.0.2
+[INFO] Processing change of spelling:spelling:0.0.2 -> 0.0.2
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.803 s
+[INFO] Finished at: 2023-04-27T04:06:20+03:00
+[INFO] ------------------------------------------------------------------------
+[Pipeline] sh
++ mvn help:evaluate -Dexpression=project.version -q -DforceStdout
+0.0.2
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build & Test)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
++ mvn verify
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for spelling:spelling:jar:0.0.2
+[WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-jar-plugin is missing. @ line 29, column 15
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] -------------------------< spelling:spelling >--------------------------
+[INFO] Building spelling 0.0.2
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ spelling ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 1 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:2.3.2:compile (default-compile) @ spelling ---
+[INFO] Compiling 7 source files to /var/lib/jenkins/workspace/ibrary-multibranch_release_0.0.2/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ spelling ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /var/lib/jenkins/workspace/ibrary-multibranch_release_0.0.2/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:2.3.2:testCompile (default-testCompile) @ spelling ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ spelling ---
+[INFO] No tests to run.
+[INFO] 
+[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ spelling ---
+[INFO] Building jar: /var/lib/jenkins/workspace/ibrary-multibranch_release_0.0.2/target/spelling.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.316 s
+[INFO] Finished at: 2023-04-27T04:06:24+03:00
+[INFO] ------------------------------------------------------------------------
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Code analysis)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
++ mvn checkstyle:checkstyle
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for spelling:spelling:jar:0.0.2
+[WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-jar-plugin is missing. @ line 29, column 15
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] -------------------------< spelling:spelling >--------------------------
+[INFO] Building spelling 0.0.2
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-checkstyle-plugin:3.2.2:checkstyle (default-cli) @ spelling ---
+[INFO] Rendering content with org.apache.maven.skins:maven-default-skin:jar:1.3 skin.
+[INFO] There are 139 errors reported by Checkstyle 9.3 with sun_checks.xml ruleset.
+[WARNING] Unable to locate Source XRef to link to - DISABLED
+[WARNING] Unable to locate Test Source XRef to link to - DISABLED
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.706 s
+[INFO] Finished at: 2023-04-27T04:06:27+03:00
+[INFO] ------------------------------------------------------------------------
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Push changes to git)
+[Pipeline] tool
+[Pipeline] envVarsForTool
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] script
+[Pipeline] {
+[Pipeline] catchError
+[Pipeline] {
+[Pipeline] withCredentials
+ > git --version # timeout=10
+ > git --version # 'git version 2.34.1'
+Masking supported pattern matches of $GIT_USERNAME or $GIT_PASSWORD or $GIT_ASKPASS
+[Pipeline] {
+[Pipeline] sh
++ git add pom.xml
+[Pipeline] sh
++ git commit -m Jenkins triggered build: 59, set version 0.0.2
+On branch release/0.0.2
+nothing to commit, working tree clean
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+ERROR: script returned exit code 1
+[Pipeline] // catchError
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] slackSend
+Slack Send Pipeline step running, values are - baseUrl: <empty>, teamDomain: test-oln2831, channel: #ex-suggested-library, color: good, botUser: false, tokenCredentialId: slack-jenkins, notifyCommitters: false, iconEmoji: <empty>, username: <empty>, timestamp: <empty>
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS

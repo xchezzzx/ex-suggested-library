@@ -52,7 +52,6 @@ pipeline {
             }
         }
         
-
         stage('Push changes to git') {
             steps {
                 script {
