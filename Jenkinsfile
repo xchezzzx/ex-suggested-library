@@ -63,15 +63,16 @@ pipeline {
                     sh "mvn versions:set -DnewVersion=${newVersionNumber}"
                     echo "You are here 3"
                     sh "mvn help:evaluate -Dexpression=project.version -q -DforceStdout"
+                    echo "You are here 4"
 
                     // Add the new file to Git
-                    sh 'git add .'
+                    sh "git add ."
                     
                     // Commit the changes with a message
-                    sh 'git commit -m "Updated version in pom file: ${newVersionNumber}"'
+                    sh "git commit -am 'Jenkins triggered build: ${env.BUILD_NUMBER}'"
                     
                     // Push the changes to the "master" branch
-                    sh 'git push env.GIT_BRANCH '
+                    sh "git push -u origin ${env.GIT_BRANCH}"
 
                 }   
             }
@@ -92,7 +93,20 @@ pipeline {
                 }
             }
         }
-    }
+
+        // stage('Push changes to git') {
+        //     steps {
+        //         script {
+        //             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+        //                 withCredentials([usernamePassword(credentialsId: 'example-secure', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+        //                     sh "git add ."
+        //                     sh "git commit -m 'Jenkins triggered build: ${env.BUILD_NUMBER}'"
+        //                     sh "git push -u origin ${env.GIT_BRANCH}"
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
 
     post {
         success {
