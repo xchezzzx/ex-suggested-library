@@ -25,20 +25,13 @@ pipeline {
                     
                     env.newVersionNumber = env.GIT_BRANCH.replaceAll('release/', '')
                     echo "Current version number: ${newVersionNumber}"
-                    echo "You are here 1"
-
                     //checking the version in the pom file
                     previousVersionNumber = sh(script: "mvn help:evaluate -Dexpression=project.version -q -DforceStdout", returnStdout: true).trim()
                     echo "Existing version number: ${previousVersionNumber}"
-                    echo "You are here 2"
-
-                    //sh "mvn versions:compare -DcompareTo=${newVersionNumber}"
-
                     //setting new version to the pom file
                     sh "mvn versions:set -DnewVersion=${newVersionNumber}"
-                    echo "You are here 3"
+                    //checking if the new version is set
                     sh "mvn help:evaluate -Dexpression=project.version -q -DforceStdout"
-                    echo "You are here 4"
                 }   
             }
         }
