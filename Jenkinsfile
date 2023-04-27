@@ -44,7 +44,7 @@ pipeline {
                     sh "git add pom.xml"
                     
                     // Commit the changes with a message
-                    sh "git commit -am 'Jenkins triggered build: ${env.BUILD_NUMBER}, set version ${newVersionNumber}'"
+                    sh "git commit -m 'Jenkins triggered build: ${env.BUILD_NUMBER}, set version ${newVersionNumber}'"
                     
                     // Push the changes to the "master" branch
                     sh "git push -u origin ${env.GIT_BRANCH}"
