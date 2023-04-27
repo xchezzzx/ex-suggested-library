@@ -23,12 +23,12 @@ pipeline {
             steps {
                 script {
                     
-                    def env.newVersionNumber = env.GIT_BRANCH.replaceAll('release/', '')
+                    env.newVersionNumber = env.GIT_BRANCH.replaceAll('release/', '')
                     echo "Current version number: ${newVersionNumber}"
                     echo "You are here 1"
 
                     //checking the version in the pom file
-                    def previousVersionNumber = sh(script: "mvn help:evaluate -Dexpression=project.version -q -DforceStdout", returnStdout: true).trim()
+                    previousVersionNumber = sh(script: "mvn help:evaluate -Dexpression=project.version -q -DforceStdout", returnStdout: true).trim()
                     echo "Existing version number: ${previousVersionNumber}"
                     echo "You are here 2"
 
