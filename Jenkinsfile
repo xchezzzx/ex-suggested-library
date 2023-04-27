@@ -23,7 +23,7 @@ pipeline {
             steps {
                 script {
                     
-                    newVersionNumber = env.GIT_BRANCH.replaceAll('release/', '')
+                    def env.newVersionNumber = env.GIT_BRANCH.replaceAll('release/', '')
                     echo "Current version number: ${newVersionNumber}"
                     echo "You are here 1"
 
@@ -39,18 +39,6 @@ pipeline {
                     echo "You are here 3"
                     sh "mvn help:evaluate -Dexpression=project.version -q -DforceStdout"
                     echo "You are here 4"
-
-                    withCredentials([gitUsernamePassword(credentialsId: 'jenkins-devops-course', gitToolName: 'Default')]) {
-                        // Add the new file to Git
-                        sh "git add pom.xml"
-                        
-                        // Commit the changes with a message
-                        sh "git commit -m 'Jenkins triggered build: ${env.BUILD_NUMBER}, set version ${newVersionNumber}'"
-                        
-                        // Push the changes to the "master" branch
-                        sh "git push origin ${env.GIT_BRANCH}"
-
-                    }
                 }   
             }
         }
@@ -70,20 +58,26 @@ pipeline {
                 }
             }
         }
+        
 
-        // stage('Push changes to git') {
-        //     steps {
-        //         script {
-        //             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-        //                 withCredentials([usernamePassword(credentialsId: 'example-secure', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-        //                     sh "git add ."
-        //                     sh "git commit -m 'Jenkins triggered build: ${env.BUILD_NUMBER}'"
-        //                     sh "git push -u origin ${env.GIT_BRANCH}"
-        //                 }
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Push changes to git') {
+            steps {
+                script {
+                    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                            withCredentials([gitUsernamePassword(credentialsId: 'jenkins-devops-course', gitToolName: 'Default')]) {
+                            // Add the new file to Git
+                            sh "git add pom.xml"
+                            
+                            // Commit the changes with a message
+                            sh "git commit -m 'Jenkins triggered build: ${env.BUILD_NUMBER}, set version ${newVersionNumber}'"
+                            
+                            // Push the changes to the "master" branch
+                            sh "git push origin ${env.GIT_BRANCH}"
+                        }
+                    }
+                }
+            }
+        }
     }
 
     post {
