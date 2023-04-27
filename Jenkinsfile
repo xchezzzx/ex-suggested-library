@@ -39,6 +39,7 @@ pipeline {
         stage('Build & Test') {
             steps {
                 script{
+                    sh "mvn test"
                     sh "mvn verify"
                 }
             }
