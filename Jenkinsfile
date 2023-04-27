@@ -40,14 +40,17 @@ pipeline {
                     sh "mvn help:evaluate -Dexpression=project.version -q -DforceStdout"
                     echo "You are here 4"
 
-                    // Add the new file to Git
-                    sh "git add pom.xml"
-                    
-                    // Commit the changes with a message
-                    sh "git commit -m 'Jenkins triggered build: ${env.BUILD_NUMBER}, set version ${newVersionNumber}'"
-                    
-                    // Push the changes to the "master" branch
-                    sh "git push origin ${env.GIT_BRANCH}"
+                    withCredentials([gitUsernamePassword(credentialsId: 'jenkins-devops-course', gitToolName: 'Default')]) {
+                        // Add the new file to Git
+                        sh "git add pom.xml"
+                        
+                        // Commit the changes with a message
+                        sh "git commit -m 'Jenkins triggered build: ${env.BUILD_NUMBER}, set version ${newVersionNumber}'"
+                        
+                        // Push the changes to the "master" branch
+                        sh "git push origin ${env.GIT_BRANCH}"
+
+                    }
                 }   
             }
         }
