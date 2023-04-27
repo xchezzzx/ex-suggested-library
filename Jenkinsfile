@@ -41,7 +41,7 @@ pipeline {
                     echo "You are here 4"
 
                     // Add the new file to Git
-                    sh "git add ."
+                    sh "git add pom.xml"
                     
                     // Commit the changes with a message
                     sh "git commit -am 'Jenkins triggered build: ${env.BUILD_NUMBER}'"
@@ -82,7 +82,7 @@ pipeline {
         //     }
         // }
     }
-    
+
     post {
         success {
             slackSend(
