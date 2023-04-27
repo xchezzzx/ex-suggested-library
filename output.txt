@@ -12,7 +12,7 @@ using GIT_ASKPASS to set credentials jenkins-devops-course
 Seen branch in repository origin/master
 Seen branch in repository origin/release/0.0.2
 Seen 2 remote branches
-Obtained Jenkinsfile from 66715f40368163ddaff4b39547db00b36332c865
+Obtained Jenkinsfile from fc0f78834d07748adcc16db62a935f648b72e291
 [Pipeline] Start of Pipeline
 [Pipeline] node
 Running on Jenkins in /var/lib/jenkins/workspace/ibrary-multibranch_release_0.0.2
@@ -36,14 +36,14 @@ Fetching upstream changes from https://github.com/xchezzzx/ex-suggested-library
  > git --version # 'git version 2.34.1'
 using GIT_ASKPASS to set credentials jenkins-devops-course
  > git fetch --no-tags --force --progress -- https://github.com/xchezzzx/ex-suggested-library +refs/heads/*:refs/remotes/origin/* # timeout=10
-Checking out Revision 66715f40368163ddaff4b39547db00b36332c865 (release/0.0.2)
+Checking out Revision fc0f78834d07748adcc16db62a935f648b72e291 (release/0.0.2)
  > git config core.sparsecheckout # timeout=10
- > git checkout -f 66715f40368163ddaff4b39547db00b36332c865 # timeout=10
+ > git checkout -f fc0f78834d07748adcc16db62a935f648b72e291 # timeout=10
  > git branch -a -v --no-abbrev # timeout=10
  > git branch -D release/0.0.2 # timeout=10
- > git checkout -b release/0.0.2 66715f40368163ddaff4b39547db00b36332c865 # timeout=10
-Commit message: "Jenkins triggered build: 58, set version 0.0.2"
- > git rev-list --no-walk 3a2a04452967e351b1a0f6435dfae95af716ca48 # timeout=10
+ > git checkout -b release/0.0.2 fc0f78834d07748adcc16db62a935f648b72e291 # timeout=10
+Commit message: "final + test"
+ > git rev-list --no-walk 0da54279e727eaf2f556a819cbbca9f685346d5c # timeout=10
 [Pipeline] }
 [Pipeline] // stage
 [Pipeline] withEnv
@@ -69,12 +69,12 @@ Current version number: 0.0.2
 [Pipeline] sh
 + mvn help:evaluate -Dexpression=project.version -q -DforceStdout
 [Pipeline] echo
-Existing version number: 0.0.2
+Existing version number: 0.0.1
 [Pipeline] sh
 + mvn versions:set -DnewVersion=0.0.2
 [INFO] Scanning for projects...
 [WARNING] 
-[WARNING] Some problems were encountered while building the effective model for spelling:spelling:jar:0.0.2
+[WARNING] Some problems were encountered while building the effective model for spelling:spelling:jar:0.0.1
 [WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-jar-plugin is missing. @ line 29, column 15
 [WARNING] 
 [WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
@@ -83,18 +83,22 @@ Existing version number: 0.0.2
 [WARNING] 
 [INFO] 
 [INFO] -------------------------< spelling:spelling >--------------------------
-[INFO] Building spelling 0.0.2
+[INFO] Building spelling 0.0.1
 [INFO] --------------------------------[ jar ]---------------------------------
 [INFO] 
 [INFO] --- versions-maven-plugin:2.15.0:set (default-cli) @ spelling ---
 [INFO] Searching for local aggregator root...
 [INFO] Local aggregation root: /var/lib/jenkins/workspace/ibrary-multibranch_release_0.0.2
-[INFO] Processing change of spelling:spelling:0.0.2 -> 0.0.2
+[INFO] Processing change of spelling:spelling:0.0.1 -> 0.0.2
+[INFO] Processing spelling:spelling
+[INFO]     Updating project spelling:spelling
+[INFO]         from version 0.0.1 to 0.0.2
+[INFO] 
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  0.803 s
-[INFO] Finished at: 2023-04-27T04:06:20+03:00
+[INFO] Total time:  0.847 s
+[INFO] Finished at: 2023-04-27T04:13:10+03:00
 [INFO] ------------------------------------------------------------------------
 [Pipeline] sh
 + mvn help:evaluate -Dexpression=project.version -q -DforceStdout
@@ -114,7 +118,7 @@ Existing version number: 0.0.2
 [Pipeline] script
 [Pipeline] {
 [Pipeline] sh
-+ mvn verify
++ mvn test
 [INFO] Scanning for projects...
 [WARNING] 
 [WARNING] Some problems were encountered while building the effective model for spelling:spelling:jar:0.0.2
@@ -145,14 +149,52 @@ Existing version number: 0.0.2
 [INFO] 
 [INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ spelling ---
 [INFO] No tests to run.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.013 s
+[INFO] Finished at: 2023-04-27T04:13:14+03:00
+[INFO] ------------------------------------------------------------------------
+[Pipeline] sh
++ mvn verify
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for spelling:spelling:jar:0.0.2
+[WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-jar-plugin is missing. @ line 29, column 15
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] -------------------------< spelling:spelling >--------------------------
+[INFO] Building spelling 0.0.2
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ spelling ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 1 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:2.3.2:compile (default-compile) @ spelling ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ spelling ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /var/lib/jenkins/workspace/ibrary-multibranch_release_0.0.2/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:2.3.2:testCompile (default-testCompile) @ spelling ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ spelling ---
+[INFO] No tests to run.
 [INFO] 
 [INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ spelling ---
 [INFO] Building jar: /var/lib/jenkins/workspace/ibrary-multibranch_release_0.0.2/target/spelling.jar
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  1.316 s
-[INFO] Finished at: 2023-04-27T04:06:24+03:00
+[INFO] Total time:  1.052 s
+[INFO] Finished at: 2023-04-27T04:13:16+03:00
 [INFO] ------------------------------------------------------------------------
 [Pipeline] }
 [Pipeline] // script
@@ -192,8 +234,8 @@ Existing version number: 0.0.2
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  1.706 s
-[INFO] Finished at: 2023-04-27T04:06:27+03:00
+[INFO] Total time:  1.881 s
+[INFO] Finished at: 2023-04-27T04:13:19+03:00
 [INFO] ------------------------------------------------------------------------
 [Pipeline] }
 [Pipeline] // script
@@ -219,13 +261,33 @@ Masking supported pattern matches of $GIT_USERNAME or $GIT_PASSWORD or $GIT_ASKP
 [Pipeline] sh
 + git add pom.xml
 [Pipeline] sh
-+ git commit -m Jenkins triggered build: 59, set version 0.0.2
-On branch release/0.0.2
-nothing to commit, working tree clean
++ git commit -m Jenkins triggered build: 61, set version 0.0.2
+[release/0.0.2 de1f1ba] Jenkins triggered build: 61, set version 0.0.2
+ Committer: Jenkins <jenkins@HAL-9000>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+[Pipeline] sh
++ git push origin release/0.0.2
+remote: Resolving deltas:   0% (0/2)        
+remote: Resolving deltas:  50% (1/2)        
+remote: Resolving deltas: 100% (2/2)        
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.        
+To https://github.com/xchezzzx/ex-suggested-library
+   fc0f788..de1f1ba  release/0.0.2 -> release/0.0.2
 [Pipeline] }
 [Pipeline] // withCredentials
 [Pipeline] }
-ERROR: script returned exit code 1
 [Pipeline] // catchError
 [Pipeline] }
 [Pipeline] // script
