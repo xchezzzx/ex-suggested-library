@@ -47,7 +47,7 @@ pipeline {
                     sh "git commit -m 'Jenkins triggered build: ${env.BUILD_NUMBER}, set version ${newVersionNumber}'"
                     
                     // Push the changes to the "master" branch
-                    sh "git push -u origin ${env.GIT_BRANCH}"
+                    sh "git push origin ${env.GIT_BRANCH}"
                 }   
             }
         }
