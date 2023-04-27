@@ -47,7 +47,7 @@ pipeline {
         stage('Code analysis') {
             steps {
                 script {
-                echo 'step 3'
+                    sh "mvn checkstyle:checkstyle"
                 }
             }
         }

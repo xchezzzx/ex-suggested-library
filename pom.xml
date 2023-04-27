@@ -4,7 +4,7 @@
 
   <groupId>spelling</groupId>
   <artifactId>spelling</artifactId>
-  <version>0.0.2</version>
+  <version>0.0.1</version>
   <packaging>jar</packaging>
 
   <name>spelling</name>
@@ -40,6 +40,22 @@
               </archive>
           </configuration>
       </plugin>
+      <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-checkstyle-plugin</artifactId>
+      <version>3.1.2</version>
+      <executions>
+        <execution>
+          <phase>verify</phase>
+          <goals>
+            <goal>check</goal>
+          </goals>
+        </execution>
+      </executions>
+      <configuration>
+        <configLocation>checkstyle.xml</configLocation>
+      </configuration>
+    </plugin>
     </plugins>
   </build>
   <dependencies>
