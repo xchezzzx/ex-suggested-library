@@ -63,6 +63,16 @@ pipeline {
                     sh "mvn versions:set -DnewVersion=${newVersionNumber}"
                     echo "You are here 3"
                     sh "mvn help:evaluate -Dexpression=project.version -q -DforceStdout"
+
+                    // Add the new file to Git
+                    sh 'git add .'
+                    
+                    // Commit the changes with a message
+                    sh 'git commit -m "Updated version in pom file: ${newVersionNumber}"'
+                    
+                    // Push the changes to the "master" branch
+                    sh 'git push env.GIT_BRANCH '
+
                 }   
             }
         }
